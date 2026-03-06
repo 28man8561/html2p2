@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-green: #e1eade;
+            --deep-sage: #5b705f;
+            --text: #2d3436;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--pastel-green);
+            color: var(--text);
+            overflow: hidden; /* Clean fullscreen look */
+        }
+
+        .wrapper {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Left Side: Content */
+        .content-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10% 8%;
+            background: var(--white);
+            z-index: 2;
+        }
+
+        .subtitle {
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 0.75rem;
+            color: var(--deep-sage);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 0.9;
+            margin: 0 0 2rem 0;
+            font-weight: 500;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 450px;
+            margin-bottom: 3rem;
+            color: var(--deep-sage);
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        nav a:hover {
+            color: var(--deep-sage);
+            padding-left: 10px;
+        }
+
+        nav a::before {
+            content: "—";
+            margin-right: 10px;
+            opacity: 0.3;
+        }
+
+        /* Right Side: Aesthetic Visuals */
+        .visual-side {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 15px;
+            padding: 15px;
+            background: var(--pastel-green);
+        }
+
+        .img-box {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(20%) grayscale(20%) contrast(90%);
+            transition: transform 0.8s ease;
+        }
+
+        .img-box:hover img {
+            transform: scale(1.05);
+            filter: none;
+        }
+
+        /* Contact Link Specific Styling */
+        .contact-link {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--deep-sage) !important;
+        }
+
+        @media (max-width: 900px) {
+            .wrapper { flex-direction: column; overflow-y: auto; }
+            .content-side { padding: 3rem 1.5rem; }
+            .visual-side { height: 60vh; grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; }
+            h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <section class="content-side">
+            <span class="subtitle">Digital Media Portfolio</span>
+            <h1>Megan An</h1>
+            
+            <p class="intro-text">
+                Graphic designs and photography done throughout the school year.
+            </p>
+
+            <nav>
+                <a href="design2.html">Design Portfolio</a>
+                <a href="photos2.html">Photography Collection</a>
+                <a href="about2.html">About the Artist</a>
+                <a href="mailto:mechiicora@gmail.com" class="contact-link">Get in Touch</a>
+            </nav>
+        </section>
+
+        <section class="visual-side">
+            <div class="img-box"><img src="yellow.jpeg" alt="yellow cone"></div>
+            <div class="img-box"><img src="IMG_5323.jpeg" alt="staircase"></div>
+            <div class="img-box"><img src="image.psd.jpg" alt="twilight"></div>
+            <div class="img-box"><img src="IMG_5357.jpeg" alt="red trash can"></div>
+        </section>
+    </div>
+
+</body>
+</html>

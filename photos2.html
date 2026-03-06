@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography | Pastel Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-green: #f0f4f1;  /* Very light wash green */
+            --sage: #a8bba8;          /* Soft sage accent */
+            --deep-sage: #4a5c4a;     /* Darker text green */
+            --white: #ffffff;
+            /* ADJUST THIS TO RESIZE IMAGES (80vh = 80% of screen height) */
+            --img-height: 80vh;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--pastel-green);
+            color: var(--deep-sage);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Header Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: var(--deep-sage);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--sage);
+            padding-bottom: 4px;
+            transition: 0.3s ease;
+        }
+
+        .home-link:hover {
+            letter-spacing: 6px;
+            border-color: var(--deep-sage);
+        }
+
+        /* --- Interactive Slideshow --- */
+        .photo-container {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .photo-slide {
+            position: absolute;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .photo-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .img-wrap {
+            height: var(--img-height);
+            width: auto;
+            max-width: 90vw;
+            box-shadow: 0 50px 80px rgba(74, 92, 74, 0.1);
+            background: var(--white);
+            padding: 15px; /* Creates a "polaroid" or framed border feel */
+        }
+
+        .img-wrap img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .caption {
+            margin-top: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--sage);
+        }
+
+        /* --- UI Elements --- */
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            left: 60px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .interaction-hint {
+            position: fixed;
+            bottom: 40px;
+            right: 60px;
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 30px; }
+            .img-wrap { height: 60vh; padding: 10px; }
+            .slide-counter, .interaction-hint { bottom: 20px; left: 30px; right: 30px; text-align: center; }
+            .interaction-hint { display: none; }
+        }
+    </style>
+</head>
+<body onclick="nextPhoto()">
+
+    <header>
+        <a href="index2.html" class="home-link">Home</a>
+        <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem;">Photography Portfolio</div>
+    </header>
+
+    <main class="photo-container">
+        <section class="photo-slide active">
+            <div class="img-wrap">
+                <img src="IMG_5334.jpeg" alt="Yellow">
+            </div>
+            <p class="caption">Yellow Cones</p>
+        </section>
+
+        <section class="photo-slide">
+            <div class="img-wrap">
+                <img src="IMG_5389.jpeg" alt="Black Railing">
+            </div>
+            <p class="caption">Railing Noir</p>
+        </section>
+
+        <section class="photo-slide">
+            <div class="img-wrap">
+                <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=80" alt="Mountains">
+            </div>
+            <p class="caption">03. Silent Peaks</p>
+        </section>
+    </main>
+
+    <div class="slide-counter" id="counter">1 / 3</div>
+    <div class="interaction-hint">Click or Space to Advance</div>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.photo-slide');
+        const counter = document.getElementById('counter');
+
+        function nextPhoto() {
+            // Remove active class from current
+            slides[currentIndex].classList.remove('active');
+            
+            // Move to next
+            currentIndex = (currentIndex + 1) % slides.length;
+            
+            // Add active class to new
+            slides[currentIndex].classList.add('active');
+            
+            // Update counter
+            counter.innerText = `${currentIndex + 1} / ${slides.length}`;
+        }
+
+        // Spacebar listener
+        window.addEventListener('keydown', (e) => {
+            if (e.code === "Space") {
+                e.preventDefault();
+                nextPhoto();
+            }
+        });
+    </script>
+</body>
+</html>

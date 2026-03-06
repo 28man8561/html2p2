@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Portfolio | Interactive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7faf9;
+            --mint: #d1e7dd;
+            --sage: #7da091;
+            --text: #2d3a30;
+            /* ADJUST THIS VALUE TO RESIZE ALL IMAGES */
+            --image-width: 850px; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            color: var(--sage);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border: 1px solid var(--mint);
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .home-btn:hover {
+            background: var(--mint);
+            color: white;
+        }
+
+        /* --- Slideshow Layout --- */
+        .slider {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Indicates you can click to move */
+        }
+
+        .slide {
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: none;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .img-container {
+            width: var(--image-width);
+            max-width: 90vw;
+            aspect-ratio: 16 / 9;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 500;
+        }
+
+        .info p {
+            font-size: 0.8rem;
+            color: var(--sage);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .controls-hint {
+            padding: 30px;
+            text-align: center;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--sage);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body onclick="nextSlide()">
+
+    <header>
+        <a href="index2.html" class="home-btn">← Back to Home</a>
+        <div style="font-family: 'Cormorant Garamond', serif; font-style: italic;">Design Portfolio</div>
+    </header>
+
+    <main class="slider">
+        <section class="slide active">
+            <div class="img-container">
+                <img src="pinkpNTHERESS.png" alt="Work 1">
+            </div>
+            <div class="info">
+                <p>Celebrity Collage</p>
+                <h2>PinkPanthress</h2>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="img-container">
+                <img src="image.psd-3.jpg" alt="Work 2">
+            </div>
+            <div class="info">
+                <p>Typography</p>
+                <h2>Lonely</h2>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="img-container">
+                <img src="cubism.png" alt="Work 3">
+            </div>
+            <div class="info">
+                <p>Cubism Inspired Design</p>
+                <h2>Final Fantasy</h2>
+            </div>
+        </section>
+    </main>
+
+    <footer class="controls-hint">
+        CLICK ANYWHERE OR PRESS SPACE TO ADVANCE
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Listen for Space bar
+        window.addEventListener('keydown', (e) => {
+            if (e.code === "Space") {
+                e.preventDefault(); // Prevents page from jumping down
+                nextSlide();
+            }
+        });
+    </script>
+</body>
+</html>
+    
